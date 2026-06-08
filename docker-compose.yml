@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
 
   api:
-    image: feliperomeroco/ticsas-chatbot-api:v5.2
+    image: feliperomeroco/ticsas-chatbot-api:v1
     container_name: ticsas-chatbot-api
     depends_on:
       - db
