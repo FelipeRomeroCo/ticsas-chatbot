@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TICSAS - Todo en material eléctrico</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React // Agregar instalacion del servidor -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- CDN babel-->
+
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .carousel-container {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+      }
+
+      .carousel-item {
+        flex: 0 0 calc(25% - 0.75rem);
+        min-width: 200px;
+      }
+
+      @media (max-width: 1024px) {
+        .carousel-item {
+          flex: 0 0 calc(33.333% - 0.75rem);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-item {
+          flex: 0 0 calc(50% - 0.75rem);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .carousel-item {
+          flex: 0 0 calc(100% - 0.75rem);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+      <!-- Top Navigation -->
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center text-xs sm:text-sm text-gray-600"
+      >
+        <div>TICSAS S.A.S TECNOLOGIA INC</div>
+        <div class="flex gap-4">
+          <span>Síguenos en redes</span>
+        </div>
+      </div>
+
+      <!-- Main Header -->
+      <div class="bg-yellow-400 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          <!-- Logo -->
+          <div class="flex items-center gap-2">
+            <div
+              class="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center"
+            >
+              <span class="text-yellow-400 font-bold text-lg">T</span>
+            </div>
+            <span class="font-bold text-gray-900 hidden sm:inline">TICSAS</span>
+          </div>
+
+          <!-- Navigation Menu -->
+          <nav class="hidden md:flex gap-8 text-gray-900 font-semibold text-sm">
+            <a href="#" class="hover:text-gray-700">Misión y Visión</a>
+            <a href="#" class="hover:text-gray-700">Quiénes somos</a>
+            <a href="#" class="hover:text-gray-700">Contacto</a>
+            <a href="#" class="hover:text-gray-700">¿Cómo comprar?</a>
+          </nav>
+
+          <!-- Search and Icons -->
+          <div class="flex items-center gap-4">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              class="hidden sm:block px-3 py-1 rounded-full text-sm w-40 focus:outline-none"
+            />
+            <button class="text-gray-900 font-semibold">Buscar</button>
+            <button class="text-gray-900 text-xl">🛒</button>
+            <button class="text-gray-900 text-xl">👤</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gray-900 text-white py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Text Content -->
+          <div class="space-y-6">
+            <!-- Badge -->
+            <div
+              class="inline-block bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-bold text-sm"
+            >
+              ¡BIENVENIDOS A TICSAS!
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+              Todo en material eléctrico,
+            </h1>
+
+            <!-- Description -->
+            <div class="space-y-4 text-gray-300 text-sm md:text-base">
+              <p>
+                Electrónica, domótica, control, cableado estructurado y fibra
+                óptica, telemetría y mucho más
+              </p>
+              <p>
+                Descubre nuestra amplia gama de productos y aprovecha nuestras
+                ofertas.
+              </p>
+            </div>
+
+            <!-- CTA Button -->
+            <button
+              onclick="openChat()"
+              class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              Quiero Hacer una Compra
+            </button>
+          </div>
+
+          <!-- Hero Image -->
+          <div
+            class="relative h-80 lg:h-96 bg-gray-800 rounded-lg overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
+              alt="Materiales eléctricos"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="bg-yellow-400 py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+            Productos Destacados
+          </h2>
+          <a href="#" class="text-gray-900 font-semibold hover:text-gray-800"
+            >Ver más</a
+          >
+        </div>
+
+        <!-- Products Carousel -->
+        <div class="carousel-container" id="carousel">
+          <!-- Product 1 -->
+          <div class="carousel-item">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+              <div class="bg-gray-700 h-80 flex items-center justify-center">
+                <span class="text-gray-400">
+                  <img src="assets/images/737_itemimages_1956503_2025031162941-154 ROUTER-TOTOLINK-AX1500.webp" alt="">
+                </span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 text-sm mb-2">
+                  Router Totolink Ax1500 Wi-Fi 6...
+                </h3>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-900 font-bold">$44.19</span>
+                  <button class="text-xl">🛒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="carousel-item">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+              <div class="bg-gray-700 h-80 flex items-center justify-center">
+                <span class="text-gray-400">
+                  <img src="assets/images/737_itemimages_1977811_2025-05-27-12-27-16.webp" alt="">
+                </span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 text-sm mb-2">
+                  Servicio Eléctrico Instalación / Ajuste...
+                </h3>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-900 font-bold">$0.00</span>
+                  <button class="text-xl">🛒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="carousel-item">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+              <div class="bg-gray-700 h-80 flex items-center justify-center">
+                <span class="text-gray-400">
+                  <img src="assets/images/737_itemimages_1954510_2025031160508-PREFORMADO33.webp" alt="">
+                </span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 text-sm mb-2">
+                  Preformado Adss Modelo Wfn 1280...
+                </h3>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-900 font-bold">$4.49</span>
+                  <button class="text-xl">🛒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="carousel-item">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+              <div class="bg-gray-700 h-80 flex items-center justify-center">
+                <span class="text-gray-400">
+                  <img src="assets/images/737_itemimages_1954490_20250228105119-138 PIGTAIL-FC-UPC-OM3-1.5M.webp" alt="">
+                </span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 text-sm mb-2">
+                  Pigtail Pigtail [Pigtail] Pigtail FC/upc...
+                </h3>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-900 font-bold">$3.59</span>
+                  <button class="text-xl">🛒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="carousel-item">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+              <div class="bg-gray-700 h-40 flex items-center justify-center">
+                <span class="text-gray-400">Patch Cord</span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 text-sm mb-2">
+                  Patch Cord Fufu Pat FC - G652D...
+                </h3>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-900 font-bold">$6.07</span>
+                  <button class="text-xl">🛒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-center gap-4 mt-8">
+          <button
+            onclick="scrollCarousel(-1)"
+            class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+          >
+            ← Anterior
+          </button>
+          <button
+            onclick="scrollCarousel(1)"
+            class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+          >
+            Siguiente →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- All Products Section -->
+    <section class="bg-gray-50 py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+            Todos los productos
+          </h2>
+          <div class="text-gray-600 text-sm">
+            Ordenar por:
+            <select class="ml-2 px-2 py-1 border rounded bg-white">
+              <option>Relevancia</option>
+              <option>Precio: menor a mayor</option>
+              <option>Precio: mayor a menor</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="chat-root"></div>
+
+    <audio id="msgSound" src="assets/sounds/message.mp3" preload="auto"></audio>
+
+    <!-- Chat Box -->
+    <script type="text/babel">
+      function ChatBox() {
+        const [open, setOpen] = React.useState(false);
+        const [expanded, setExpanded] = React.useState(false);
+        const [messages, setMessages] = React.useState([
+          {
+            text: "Hola 👋 ¿En qué podemos ayudarte?",
+            from: "bot",
+            time: new Date(),
+          }, // Cambiar mensaje de bienvenida
+        ]);
+        const [input, setInput] = React.useState("");
+        const [typing, setTyping] = React.useState(false);
+
+        React.useEffect(() => {
+          window.openChat = () => setOpen(true);
+        }, []);
+
+        React.useEffect(() => {
+          const resetChatHistory = async () => {
+            const existingSession = localStorage.getItem("session_id");
+
+            if (!existingSession) return;
+
+            try {
+              await fetch("http://192.168.1.87:8000/reset", {
+                method: "POST", // o GET según tu backend
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  session_id: existingSession,
+                }),
+              });
+
+              console.log("Historial eliminado correctamente");
+
+              // Crear nueva sesión después del reset
+              const newSession = generateSessionId();
+              localStorage.setItem("session_id", newSession);
+              setSessionId(newSession);
+            } catch (error) {
+              console.error("Error reseteando historial:", error);
+            }
+          };
+
+          resetChatHistory();
+        }, []);
+
+        const messagesEndRef = React.useRef(null);
+
+        const sound = () => {
+          const audio = document.getElementById("msgSound"); // Cambiar sonido si deseas otro
+
+          if (!audio) return;
+
+          audio.currentTime = 0; // reinicia para repetir rápido
+
+          audio.play().catch((err) => {
+            console.log("Audio bloqueado por el navegador:", err);
+          });
+        };
+
+        React.useEffect(() => {
+          messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); //hace scroll hacía el último mensaje
+        }, [messages, typing]);
+
+        const formatTime = (date) => {
+          return date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        };
+
+        // Generar session id único
+        const generateSessionId = () => {
+          return "session_" + Date.now();
+        };
+
+        // Obtener o crear session_id
+        const [sessionId, setSessionId] = React.useState(() => {
+          let existing = localStorage.getItem("session_id");
+
+          if (!existing) {
+            existing = generateSessionId();
+            localStorage.setItem("session_id", existing);
+          }
+
+          return existing;
+        });
+
+        // Envío de mensajes
+        const sendMessage = async () => {
+          if (!input.trim()) return;
+
+          //sound();
+
+          const userMsg = { text: input, from: "user", time: new Date() };
+
+          setMessages((prev) => [...prev, userMsg]);
+          setInput("");
+          setTyping(true);
+
+          try {
+            const response = await fetch("http://192.168.1.87:8000/chat", {
+              //cambiar por dirección del modelo docker
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                message: userMsg.text,
+                session_id: sessionId,
+              }),
+            });
+
+            const data = await response.json();
+
+            // 1. Mensaje del modelo
+            const botMsg = {
+              text: data.answer,
+              from: "bot",
+              time: new Date(),
+            };
+
+            setMessages((prev) => [...prev, botMsg]);
+
+            // 2. Si hay productos se agregan como mensajes especiales
+            if (data.products_used && data.products_used.length > 0) {
+              data.products_used.forEach((prod) => {
+                const productMsg = {
+                  type: "product",
+                  product: prod,
+                  from: "bot",
+                  time: new Date(),
+                };
+
+                setMessages((prev) => [...prev, productMsg]);
+              });
+            }
+
+            sound();
+          } catch (error) {
+            console.error(error);
+
+            setMessages((prev) => [
+              ...prev,
+              {
+                text: "Error al conectar con el servidor 🤖",
+                from: "bot",
+                time: new Date(),
+              },
+            ]);
+          }
+
+          setTyping(false);
+        };
+
+        const openWhatsApp = () => {
+          const phone = "51985519356"; // <-- Cambiar al número de Marvin o la empresa
+          const text = encodeURIComponent(
+            "Hola, quiero información sobre sus productos.",
+          );
+          window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+        };
+
+        // Modal del Chat Box
+        return (
+          <div className="fixed bottom-5 right-5 z-50 font-sans">
+            {/* Botón flotante */}
+            {!open && (
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-yellow-400 hover:bg-bg-yellow-600 text-black px-4 py-3 rounded-full shadow-xl transition transform hover:scale-110 flex items-center gap-2 border border-black"
+              >
+                <i className="fa-solid fa-comments"></i>
+              </button>
+            )}
+
+            {/* Chat */}
+            {open && (
+              <div
+                className={`${expanded ? "w-[50vw] h-[70vh]" : "w-96 h-[440px]"} bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 transition-all duration-300`}
+              >
+                {/* Header */}
+                <div className="bg-yellow-400 p-3 flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src="https://i.pravatar.cc/40?img=12"
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <div>
+                      <p className="font-bold text-sm">Asistente TICSAS</p>
+                      <span className="text-xs text-gray-800">En línea</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-center">
+                    <button onClick={openWhatsApp} title="WhatsApp">
+                      <i className="fa-brands fa-whatsapp text-green-700 text-lg"></i>
+                    </button>
+                    <button
+                      onClick={() => setExpanded(!expanded)}
+                      title="Expandir/Contraer"
+                    >
+                      <i
+                        className={`fa-solid ${expanded ? "fa-compress" : "fa-expand"} text-lg`}
+                      ></i>
+                    </button>
+                    <button onClick={() => setOpen(false)}>
+                      <i className="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mensajes */}
+                <div className="p-3 overflow-y-auto space-y-3 bg-gray-50 flex-1">
+                  {messages.map((msg, i) => {
+                    if (msg.type === "product") {
+                      return (
+                        <div key={i} className="flex justify-start">
+                          <div className="bg-white border rounded-lg p-3 shadow max-w-[80%]">
+                            <p className="font-bold text-sm">
+                              {msg.product.title}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              Precio: ${msg.product.precio}
+                            </p>
+                            <a
+                              href={msg.product.url}
+                              target="_blank"
+                              className="text-blue-500 text-xs underline"
+                            >
+                              Ver producto
+                            </a>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div
+                        key={i}
+                        className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        {msg.from === "bot" && (
+                          <img
+                            src="https://i.pravatar.cc/40?img=12"
+                            className="w-7 h-7 rounded-full mr-2"
+                          />
+                        )}
+
+                        <div className="flex flex-col max-w-[70%]">
+                          <div
+                            className={`p-2 rounded-lg text-sm shadow ${
+                              msg.from === "user"
+                                ? "bg-yellow-400 text-black"
+                                : "bg-white text-gray-800 border"
+                            }`}
+                          >
+                            {msg.text}
+                          </div>
+
+                          <span className="text-[10px] text-gray-400 mt-1 text-right">
+                            {formatTime(msg.time)}
+                          </span>
+                        </div>
+
+                        {msg.from === "user" && (
+                          <img
+                            src="https://i.pravatar.cc/40?img=3"
+                            className="w-7 h-7 rounded-full ml-2"
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  {typing && (
+                    <div className="ml-2 bg-white px-3 py-2 rounded-lg shadow text-xs text-gray-500 italic w-fit">
+                      Pensando...{" "}
+                      <img src="assets/images/proc1.gif" className="w-12" />
+                    </div>
+                  )}
+
+                  <div ref={messagesEndRef}></div>
+                </div>
+
+                {/* Input */}
+                <div className="p-2 border-t flex gap-2 bg-white">
+                  <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                    className="flex-1 border rounded-full px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    placeholder="Escribe tu mensaje..."
+                  />
+
+                  <button
+                    onClick={sendMessage}
+                    className="bg-yellow-400 hover:bg-yellow-500 px-3 rounded-full"
+                  >
+                    <i className="fa-regular fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("chat-root")).render(
+        <ChatBox />,
+      );
+    </script>
+  </body>
+</html>

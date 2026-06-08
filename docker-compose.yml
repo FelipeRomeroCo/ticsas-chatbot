@@ -1,0 +1,47 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: ticsas-chatbot-db
+    environment:
+      POSTGRES_DB: ticsas_chatbot
+      POSTGRES_USER: ticsas
+      POSTGRES_PASSWORD: ticsas_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ticsas-chatbot-ollama
+    volumes:
+      - ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  api:
+    image: feliperomeroco/ticsas-chatbot-api:v5.2
+    container_name: ticsas-chatbot-api
+    depends_on:
+      - db
+      - ollama
+    environment:
+      DATABASE_URL: postgresql://ticsas:ticsas_password@db:5432/ticsas_chatbot
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_CHAT_MODEL: qwen3:14b
+      OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./scripts:/app/scripts
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  ollama:
