@@ -318,6 +318,7 @@
     <!-- Chat Box -->
     <script type="text/babel">
       function ChatBox() {
+        const API_BASE_URL = "http://localhost:8000";
         const [open, setOpen] = React.useState(false);
         const [expanded, setExpanded] = React.useState(false);
         const [messages, setMessages] = React.useState([
@@ -341,7 +342,7 @@
             if (!existingSession) return;
 
             try {
-              await fetch("http://192.168.1.87:8000/reset", {
+              await fetch(`${API_BASE_URL}/reset`, {
                 method: "POST", // o GET según tu backend
                 headers: {
                   "Content-Type": "application/json",
@@ -420,7 +421,7 @@
           setTyping(true);
 
           try {
-            const response = await fetch("http://192.168.1.87:8000/chat", {
+            const response = await fetch(`${API_BASE_URL}/chat`, {
               //cambiar por dirección del modelo docker
               method: "POST",
               headers: {
