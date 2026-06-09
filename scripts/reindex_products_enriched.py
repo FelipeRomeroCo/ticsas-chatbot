@@ -1,25 +1,6 @@
 import hashlib
 import json
 import os
-from pathlib import Path
-from typing import Any
-
-import psycopg
-import requests
-from pgvector.psycopg import register_vector
-
-
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://ticsas:ticsas_password@db:5432/ticsas_chatbot",
-)
-
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://ollama:11434")
-EMBEDDING_MODEL = os.getenv("OLLAMA_EMBEDDING_MODEL", "nomic-embed-text")
-
-CATALOG_FILE = os.getenv(import hashlib
-import json
-import os
 import time
 from pathlib import Path
 from typing import Any
@@ -765,7 +746,6 @@ if __name__ == "__main__":
     main()
     "CATALOG_FILE",
     "/app/data/productos_ticsas_vectordb_documentos_enriquecido.jsonl",
-)
 
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", "25"))
 
